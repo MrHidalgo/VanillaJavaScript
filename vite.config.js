@@ -1,16 +1,14 @@
-import { sync } from "glob";
 import legacy from '@vitejs/plugin-legacy';
+import { sync } from 'glob';
 
 export default {
-  root: "./src",
+  root: './src',
   build: {
-    outDir: "../dist",
+    outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
-      input: sync("./src/**/*.html".replace(/\\/g, "/")),
-    },
+      input: sync('./src/**/*.html'.replaceAll('\\', '/'))
+    }
   },
-  plugins: [
-    legacy(),
-  ],
+  plugins: [legacy()]
 };

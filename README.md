@@ -1,3 +1,9 @@
+[chrome-icon]: https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png
+[firefox-icon]: https://github.com/alrra/browser-logos/blob/main/src/firefox/firefox_64x64.png
+[edge-icon]: https://github.com/alrra/browser-logos/blob/main/src/edge/edge_64x64.png
+[opera-icon]: https://github.com/alrra/browser-logos/blob/main/src/opera/opera_64x64.png
+[safari-icon]: https://github.com/alrra/browser-logos/blob/main/src/safari/safari_64x64.png
+
 # Vite Vanilla JavaScript — Template
 
 ## Features
