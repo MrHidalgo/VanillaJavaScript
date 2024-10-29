@@ -7,6 +7,7 @@
   --black: #000;
   
   background-color: white;
+  color: var(--black);
   
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-style: normal;

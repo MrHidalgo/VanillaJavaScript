@@ -1,4 +1,4 @@
-import legacy from '@vitejs/plugin-legacy';
+// import legacy from '@vitejs/plugin-legacy';
 import { sync } from 'glob';
 
 export default {
@@ -27,5 +27,5 @@ export default {
       }
     }
   },
-  plugins: [legacy()]
+  plugins: []
 };
