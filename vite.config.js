@@ -16,7 +16,13 @@ export default {
           if (/\.css$/.test(assetInfo.name)) {
             return 'css/[name]-[hash][extname]';
           }
-          return 'assets/[name]-[hash][extname]';
+          if (/\.(png|jpe?g|gif|svg|webp)$/.test(assetInfo.name)) {
+            return 'images/[name][extname]';
+          }
+          if (/\.(woff2?|ttf|otf|eot)$/.test(assetInfo.name)) {
+            return 'fonts/[name][extname]';
+          }
+          return 'assets/[name][extname]';
         }
       }
     }
