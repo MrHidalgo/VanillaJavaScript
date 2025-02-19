@@ -1,0 +1,40 @@
+.c-btn {
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: 48px;
+	padding-left: 50px;
+	padding-right: 50px;
+	border: none;
+	border-radius: 10rem;
+	box-shadow: none;
+	background-color: $c-festival;
+	font-weight: 600;
+	font-size: 16px;
+	color: $c-black;
+	@include transition(background-color, color);
+	
+	&:hover {
+		background-color: $c-festival-dark;
+		@include transition(background-color, color);
+	}
+	
+	&.is-disabled {
+		pointer-events: none;
+		background-color: $c-nero;
+		color: $c-dim-grey;
+	}
+	
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		
+		&--center {
+			justify-content: center;
+		}
+	}
+}

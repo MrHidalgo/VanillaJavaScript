@@ -1,0 +1,27 @@
+/// ADDITIONALLY
+/// ===============
+$maxWidth: 1256px;
+$paddingLeft: 16px;
+$paddingRight: $paddingLeft;
+
+/// MAIN
+/// ===============
+.c-grid {
+	@extend %grid;
+	@if($maxWidth) {
+		max-width: $maxWidth;
+	}
+	padding-right: $paddingRight;
+	padding-left: $paddingLeft;
+	
+	&.c-grid--small {}
+	&.c-grid--medium {}
+	&.c-grid--big {}
+	
+	&--fluid {
+		@extend %grid;
+		max-width: 100%;
+		padding-right: $paddingRight;
+		padding-left: $paddingLeft;
+	}
+}

@@ -1,4 +1,6 @@
 // import legacy from '@vitejs/plugin-legacy';
+import path from 'node:path';
+
 import { sync } from 'glob';
 
 export default {
@@ -27,5 +29,17 @@ export default {
       }
     }
   },
-  plugins: []
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
+  plugins: [],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/assets/css/global-utilities";`
+      }
+    }
+  }
 };

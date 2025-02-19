@@ -6,10 +6,9 @@
   --white: #fff;
   --black: #000;
   
-  background-color: white;
+  background-color: var(--white);
   color: var(--black);
   
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-style: normal;
   line-height: 1.5;
   font-weight: 400;
@@ -24,6 +23,6 @@
 }
 
 body {
-  font-family: Inter, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-optical-sizing: auto;
 }

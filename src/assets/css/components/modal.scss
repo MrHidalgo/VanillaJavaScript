@@ -1,0 +1,131 @@
+.c-modal {
+	opacity: 0;
+	visibility: hidden;
+	z-index: 9993;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	width: 100%;
+	min-height: 100%;
+	max-height: 100%;
+	@include transition(opacity 0.2s, visibility 0.2s);
+	
+	&.is-show {
+		display: flex;
+	}
+	
+	&.is-animate {
+		opacity: 1;
+		visibility: visible;
+		@include transition(opacity 0.2s, visibility 0.2s);
+		
+		.c-modal__content {
+			transform: translateY(0) scale(1);
+			@include transition(transform);
+		}
+	}
+	
+	&__bg {
+		z-index: 9991;
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		max-height: 100%;
+	}
+	
+	&__overlay {
+		z-index: 9990;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba($c-black, 0.5);
+		backdrop-filter: blur(3px);
+	}
+	
+	&__container {
+		z-index: 9992;
+		overflow: hidden;
+		overflow-y: auto;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+		max-height: 100%;
+		padding: 32px 16px;
+		text-align: center;
+		font-size: 0;
+		
+		&:before {
+			content: '';
+			display: inline-block;
+			vertical-align: middle;
+			min-height: 100%;
+			height: 100%;
+			margin-left: -0.3px;
+		}
+	}
+	
+	&__content {
+		z-index: 9995;
+		//overflow: hidden;
+		position: relative;
+		vertical-align: middle;
+		display: inline-block;
+		width: 100%;
+		transform: translateY(100px) scale(0.9);
+		max-width: 510px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 32px;
+		border-radius: 12px;
+		background-color: #131312;
+		text-align: left;
+		font-size: 14px;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		@include transition(transform);
+		@include adaptive(767) {
+			padding-left: 16px;
+			padding-right: 16px;
+		}
+	}
+	
+	&__close {
+		z-index: 10;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		margin-left: auto;
+		margin-bottom: 48px;
+		border: 1px solid var(--rb-grey6);
+		box-shadow: none;
+		border-radius: 12px;
+		background-color: transparent;
+		@include transition(background-color);
+		@include adaptive(767) {
+			right: 20px;
+		}
+		
+		&:hover {
+			background-color: var(--rb-grey6);
+			@include transition(background-color);
+		}
+		
+		svg {
+			path {
+				fill: var(--rb-midnight);
+			}
+		}
+	}
+}
