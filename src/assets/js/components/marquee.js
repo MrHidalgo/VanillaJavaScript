@@ -11,59 +11,72 @@ export default function Marquee() {
     const isReverse = slider.dataset.reverse === 'true';
 
     const children = [...slider.children];
-    const baseChildren = children.map((child) => child.outerHTML).join('');
-    const baseChildrenWidth = children.reduce(
+    const baseChildrenHTML = children.map((child) => child.outerHTML).join('');
+    let baseChildrenWidth = children.reduce(
       (sum, child) => sum + child.offsetWidth,
       0
     );
 
     let windowWidth = document.documentElement.clientWidth;
-    let sliderWidth;
-    let countWidth = 0;
+    let sliderWidth = baseChildrenWidth || 1;
     let addCount = 1;
+    let animation;
+    let resizeTimeout;
+    let lastWindowWidth = windowWidth;
 
     /**
-     * @description Ініціалізація слайдера
+     * @description Ініціалізація слайдера (без перезапису DOM)
      */
     const initializeSlider = () => {
-      slider.innerHTML = baseChildren; // Очистка перед додаванням
+      baseChildrenWidth = children.reduce(
+        (sum, child) => sum + (child.offsetWidth || 1),
+        0
+      );
+      if (baseChildrenWidth <= 1) return;
 
       let checkWidth = windowWidth * 2;
       sliderWidth = baseChildrenWidth;
-      countWidth = sliderWidth;
       addCount = 1;
 
-      while (countWidth < checkWidth) {
-        slider.insertAdjacentHTML('beforeend', baseChildren);
-        countWidth += sliderWidth;
+      while (sliderWidth * addCount < checkWidth) {
         addCount++;
+      }
+
+      if (slider.children.length < addCount * children.length) {
+        for (let index = 0; index < addCount - 1; index++) {
+          slider.insertAdjacentHTML('beforeend', baseChildrenHTML);
+        }
       }
     };
 
     initializeSlider();
 
     const unit = isReverse ? '' : '-';
-
     if (isReverse) {
       slider.style.marginLeft = `-${sliderWidth}px`;
     }
 
-    let animation = slider.animate(
-      { transform: `translateX(${unit}${sliderWidth}px)` },
-      {
-        fill: 'backwards',
-        duration: sliderWidth / speed,
-        easing: 'linear',
-        iterations: Infinity
-      }
-    );
+    const startAnimation = () => {
+      if (animation) animation.cancel();
 
-    let resizeTimeout;
-    let lastWindowWidth = document.documentElement.clientWidth;
+      const duration = sliderWidth / (speed || DEFAULT_SPEED);
+      if (duration <= 0 || isNaN(duration) || !isFinite(duration)) return;
+
+      animation = slider.animate(
+        { transform: `translateX(${unit}${sliderWidth}px)` },
+        {
+          fill: 'backwards',
+          duration,
+          easing: 'linear',
+          iterations: Infinity
+        }
+      );
+    };
+
+    startAnimation();
 
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
-
       resizeTimeout = setTimeout(() => {
         if (lastWindowWidth !== document.documentElement.clientWidth) {
           lastWindowWidth = document.documentElement.clientWidth;
@@ -71,21 +84,7 @@ export default function Marquee() {
 
           requestAnimationFrame(() => {
             initializeSlider();
-
-            if (isReverse) {
-              slider.style.marginLeft = `-${sliderWidth}px`;
-            }
-
-            animation.cancel();
-            animation = slider.animate(
-              { transform: `translateX(${unit}${sliderWidth}px)` },
-              {
-                fill: 'backwards',
-                duration: sliderWidth / speed,
-                easing: 'linear',
-                iterations: Infinity
-              }
-            );
+            startAnimation();
           });
         }
       }, RESIZE_DELAY);

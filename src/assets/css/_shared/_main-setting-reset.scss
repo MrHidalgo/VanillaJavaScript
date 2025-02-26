@@ -22,11 +22,11 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: $c-black;
+  background-color: $c-white;
+  color: $c-black;
   line-height: 1.42857143;
   font-size: 16px;
   font-weight: 500;
-  color: $c-white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @include adaptive(767) {
@@ -41,7 +41,7 @@ body {
     justify-content: center;
     flex: 1 0 auto;
 
-    &--start {
+    [data-main-align='start'] {
       justify-content: flex-start;
     }
   }

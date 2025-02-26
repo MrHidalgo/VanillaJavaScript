@@ -1,9 +1,9 @@
-// import legacy from '@vitejs/plugin-legacy';
 import path from 'node:path';
-
+import { defineConfig } from 'vite';
 import { sync } from 'glob';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-export default {
+export default defineConfig({
   base: './',
   root: './src',
   build: {
@@ -34,7 +34,16 @@ export default {
       '@': path.resolve(__dirname, './src')
     }
   },
-  plugins: [],
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: path.resolve(__dirname, 'public/images/**/*'),
+          dest: 'images'
+        }
+      ]
+    })
+  ],
   css: {
     preprocessorOptions: {
       scss: {
@@ -42,4 +51,4 @@ export default {
       }
     }
   }
-};
+});

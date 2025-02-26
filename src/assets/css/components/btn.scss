@@ -12,21 +12,21 @@
 	border: none;
 	border-radius: 10rem;
 	box-shadow: none;
-	background-color: $c-festival;
+	background-color: $c-black;
 	font-weight: 600;
 	font-size: 16px;
-	color: $c-black;
+	color: $c-white;
 	@include transition(background-color, color);
 	
 	&:hover {
-		background-color: $c-festival-dark;
+		background-color: $c-white;
+		color: $c-black;
 		@include transition(background-color, color);
 	}
 	
 	&.is-disabled {
+		opacity: 0.55;
 		pointer-events: none;
-		background-color: $c-nero;
-		color: $c-dim-grey;
 	}
 	
 	&__wrapper {

@@ -80,11 +80,11 @@ const Modal = (() => {
       return;
     }
   }
-  
+
   function handleKeydown(event) {
     if (event.key === 'Escape') closeAllModals();
   }
-  
+
   function init() {
     document.addEventListener('click', handleClick);
     document.addEventListener('keydown', handleKeydown);

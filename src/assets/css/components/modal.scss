@@ -44,7 +44,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba($c-black, 0.5);
+		background-color: rgba($c-black, 0.5);
 		backdrop-filter: blur(3px);
 	}
 	
@@ -87,7 +87,7 @@
 		margin-right: auto;
 		padding: 32px;
 		border-radius: 12px;
-		background-color: #131312;
+		background-color: $c-black;
 		text-align: left;
 		font-size: 14px;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -108,7 +108,7 @@
 		height: 24px;
 		margin-left: auto;
 		margin-bottom: 48px;
-		border: 1px solid var(--rb-grey6);
+		border: 1px solid $c-black;
 		box-shadow: none;
 		border-radius: 12px;
 		background-color: transparent;
@@ -124,7 +124,7 @@
 		
 		svg {
 			path {
-				fill: var(--rb-midnight);
+				fill: $c-black;
 			}
 		}
 	}
