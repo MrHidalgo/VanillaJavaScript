@@ -1,0 +1,19 @@
+# Allow all search engines to crawl the site
+User-agent: *
+
+# Disallow access to sensitive areas
+Disallow: /admin/
+Disallow: /cgi-bin/
+
+# Prevent duplicate content indexing
+Disallow: /search?q=*
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+
+# Block dynamically generated Vite assets from indexing
+Disallow: /assets/*.js$
+Disallow: /assets/*.css$
+Disallow: /assets/*.map$
+
+# Sitemap Location (important for SEO)
+Sitemap: https://yourdomain.com/sitemap.xml

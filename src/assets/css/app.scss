@@ -1,17 +1,4 @@
-@import '_shared/main-setting-reset';
-@import '_shared/fonts';
-@import '_shared/grid';
-@import '_shared/common';
-
-@import 'components/header';
-@import 'components/footer';
-@import 'components/logo';
-@import 'components/typography';
-@import 'components/btn';
-@import 'components/modal';
-@import 'components/form';
-
-/* COMMON */
-
-/* HOME */
-
+@use './_utilities' as *;
+@use './_shared' as *;
+@use './_components' as *;
+@use './_sections' as *;

@@ -1,59 +1,11 @@
-////
-/// @group  Mixin
-////
+@use "sass:string";
+@use "sass:list";
 
-/// 
-/// Mixin setting the width and height element.
-///
-/// @name   mixinDimensions
-///
-/// @param  {String}  $width             - The width property sets the width of an element.
-/// @param  {String}  $height  [$width]  - The height property sets the height of an element.
-///
-/// @see    $object
-///
-/// @example
-///   <selector> {
-///     @include mixinDimensions(100%);
-///     @include mixinDimensions(100%, 50%);
-///   }
-///
 @mixin dimensions($width, $height:$width) {
 	width: $width;
 	height: $height;
 }
 
-
-///
-/// Mixin generate animation. It uses an additional function :
-/// - **map-get()**   - returns the value in a map associated with the given key. If the map doesn’t have such a key, returns null;
-/// - **map-merge()** - Merges two maps together into a new map. Keys in $map2 will take precedence over keys in $map1;
-///
-/// @link http://sass-lang.com/documentation/Sass/Script/Functions.html#map_get-instance_method       map-get()
-/// @link http://sass-lang.com/documentation/Sass/Script/Functions.html#map_merge-instance_method     map-merge()
-///
-/// @name   mixinKeyframes
-///
-/// @param  {String}  $keyName - Animation Name
-/// @param  {Object}  $options
-///
-/// @example
-///   <selector> {
-///     @include moduleKeyframes(clockLeft,
-///       (
-///         opacityStart      : 0.8,
-///         opacityEnd        : 1,
-///         transformStart    : rotate(360deg)
-///       )
-///       ||
-///       (
-///         opacityStart      : 0.5,
-///         opacityEnd        : 1,
-///         transformDouble   : (rotate(-360deg) scale(0.5))
-///       )
-///     );
-///   }
-///
 @mixin keyframes($keyName, $options: ()) {
 	$configuration: map-merge((), $options);
 
@@ -69,10 +21,6 @@
 	}
 }
 
-
-///
-/// Mixin horizontal centered
-///
 @mixin marginAuto {
 	margin: {
 		left: auto;
@@ -80,10 +28,6 @@
 	}
 }
 
-
-///
-/// Mixin placeholder for: input, textarea
-///
 @mixin inputPlaceholder {
 	&.placeholder { @content; }
 	&:-moz-placeholder { @content; }
@@ -92,15 +36,12 @@
 	&::-webkit-input-placeholder { @content; }
 }
 
-
-///
-/// Mixin css triangle
-///
 @mixin pseudo($display: block, $pos: absolute, $content: ''){
 	content: $content;
 	display: $display;
 	position: $pos;
 }
+
 @mixin cssTriangle($color, $direction, $size: 6px, $position: absolute, $round: false){
 	@include pseudo($pos: $position);
 
@@ -134,10 +75,6 @@
 	}
 }
 
-
-///
-/// Mixin center: vertical, horizontal, or both
-///
 @mixin centered($prop: absolute, $position: both) {
 	position: $prop;
 
@@ -156,43 +93,24 @@
 	}
 }
 
-
-///
-/// Mixin transition
-///
 @mixin transition($rest...) {
 	$list: null;
 	$duration: null;
 	$idx: null;
 
 	@each $prop in ($rest) {
-		$idx: str_index(inspect($prop), "0.");
+		$idx: string.index("" + $prop, "0.");
 
 		@if($idx == null) {
 			$duration: 0.3s;
 		}
-
-		$list: append($list, $prop $duration ease-in-out, comma);
+		
+		$list: list.append($list, ($prop $duration ease-in-out), $separator: comma);
 	}
 
 	transition: $list;
 }
 
-
-///
-/// Mixin fluid
-///
-/// @example
-///
-///		<selector> {
-///			// single
-///			@include fluid(font-size, 320px, 1366px, 14px, 22px);
-///
-///			// multiple
-///			@include fluid(padding-bottom padding-top, 20em, 70em, 2em, 4em);
-///
-///		}
-///
 @mixin fluid($properties, $min-vw, $max-vw, $min-value, $max-value) {
 	@each $property in $properties {
 		#{$property}: $min-value;
@@ -211,36 +129,11 @@
 	}
 }
 
-
-///
-/// Mixin consistent Font Sizes
-///
-///	@name font-size
-///
-/// @example
-///
-///		p {
-///  		@include font-size(14px)
-///		}
-///
-///
 @mixin font-size($size) {
 	font-size: $size;
 	font-size: calculateRem($size);
 }
 
-
-///
-/// Mixin Quick Gradients
-///
-///	@name background-gradient
-///
-///	@example
-///
-///		selector {
-///			@include background-gradient(red, black, 'vertical');
-///		}
-///
 @mixin background-gradient($start-color, $end-color, $orientation) {
 	background: $start-color;
 
@@ -255,10 +148,6 @@
 	}
 }
 
-
-///
-/// Mixin generate @font-face
-/// ===============
 @mixin mixinFontFace($fontName, $fontNameExt, $fontPath, $fontWeight, $fontExtension: eot woff2 woff ttf svg) {
 	$src: null;
 	$srcEot: null;
@@ -310,15 +199,12 @@
 	}
 }
 
-
-///
-/// Mixin media queries.
-///
 @mixin respondCustom($val) {
 	@media screen and #{$val} {
 		@content;
 	}
 }
+
 @mixin adaptive($val) {
 	@media screen and (max-width: #{$val}px) {
 		@content;

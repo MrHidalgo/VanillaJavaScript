@@ -1,6 +1,8 @@
 import path from 'node:path';
-import { defineConfig } from 'vite';
+
+import tailwindcss from '@tailwindcss/vite';
 import { sync } from 'glob';
+import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
@@ -29,12 +31,8 @@ export default defineConfig({
       }
     }
   },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  },
   plugins: [
+    tailwindcss(),
     viteStaticCopy({
       targets: [
         {
@@ -43,12 +41,5 @@ export default defineConfig({
         }
       ]
     })
-  ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "src/assets/css/global-utilities";`
-      }
-    }
-  }
+  ]
 });
